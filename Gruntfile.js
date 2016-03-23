@@ -1,0 +1,36 @@
+module.exports = function(grunt){
+	//引入模块
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	//2编写任务
+	grunt.initConfig({
+		concat:{
+			con1:{
+				src:'css/*.css',
+				dest:'tmp1/index.css'
+			},
+			con2:{
+				src:'js/*.js',
+				dest:'tmp2/index.js'
+			}
+		},
+		cssmin:{
+			cmin:{
+				src:'tmp1/index.css',
+				dest:'dest/index.min.css'
+			},
+			
+		},
+		uglify:{
+			jmin:{
+				src:'tmp2/index.js',
+				dest:'dest/index.min.js'
+			}
+		},
+		clean:['tmp1','tmp2']
+	});
+	//3注册默认任务
+	grunt.registerTask('default',['concat','cssmin','uglify','clean']);
+};
